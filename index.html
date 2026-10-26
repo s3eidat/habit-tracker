@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Habit Tracker — Build Streaks, Privately in Your Browser | S3eidat Tools</title>
+<meta name="description" content="A simple private habit tracker: daily check-ins for the week, streaks, completion rate and a year heatmap per habit. Colours, emoji, archive, JSON export. No account, saved in your browser.">
+<meta property="og:title" content="Habit Tracker — streaks, privately">
+<meta property="og:description" content="Tick off habits, watch your streaks and a year heatmap grow. Everything stays in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="habit-tracker">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Habit Tracker</h1>
+    <p>Tick off your habits each day and watch the streaks grow. Open any habit to see its whole year as a heatmap. Saved in this browser only, no account.</p>
+    <div class="s3-badges"><span class="chip accent"><svg class="i"><use href="#i-lock"/></svg>Stored in this browser only</span><span class="chip">Streaks &amp; completion %</span><span class="chip">Year heatmap</span></div>
+  </section>
+
+  <section class="card">
+    <div class="add-row">
+      <label class="field emoji-f">Emoji<input class="input" id="emoji" maxlength="8" value="💧" aria-label="Habit emoji"></label>
+      <label class="field grow">New habit<input class="input" id="name" dir="auto" maxlength="60" placeholder="Drink 8 glasses of water" autocomplete="off"></label>
+      <button class="btn primary" id="add"><svg class="i"><use href="#i-plus"/></svg>Add habit</button>
+    </div>
+    <div class="row mt">
+      <span class="faint">Colour</span>
+      <span class="row colors" id="colors" role="group" aria-label="Habit colour"></span>
+      <span class="grow"></span>
+      <span class="row emojis" id="emojis" aria-label="Emoji suggestions"></span>
+    </div>
+  </section>
+
+  <section class="card mt">
+    <div class="row between">
+      <div class="row">
+        <button class="btn icon small" id="prev" aria-label="Previous week">‹</button>
+        <b id="weekLabel" class="week-label"></b>
+        <button class="btn icon small" id="next" aria-label="Next week">›</button>
+        <button class="btn ghost small" id="thisWeek">This week</button>
+      </div>
+      <div class="seg" id="start" role="group" aria-label="Week starts on">
+        <button aria-pressed="false" data-v="6">Sat</button>
+        <button aria-pressed="false" data-v="7">Sun</button>
+        <button aria-pressed="true" data-v="1">Mon</button>
+      </div>
+    </div>
+    <div class="grid mt" id="grid"></div>
+    <div class="stats mt" id="stats"></div>
+  </section>
+
+  <details class="card mt" id="archBox">
+    <summary><b>Archived habits</b> <span class="faint" id="archCount"></span></summary>
+    <div class="stack mt" id="archived"></div>
+  </details>
+
+  <div class="row mt">
+    <button class="btn ghost small" id="exp"><svg class="i"><use href="#i-download"/></svg>Export JSON</button>
+    <label class="btn ghost small" id="imp"><svg class="i"><use href="#i-upload"/></svg>Import JSON<input type="file" accept=".json,application/json" hidden></label>
+    <span class="faint">Your habits are saved in this browser's storage only. Export a backup now and then.</span>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
